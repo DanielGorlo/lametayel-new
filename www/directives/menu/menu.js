@@ -6,9 +6,9 @@ lametayel.directive('menu', ['$state', '$rootScope', '$timeout', 'pushnotificati
             scope.setting = false;
             $rootScope.showMenu = false;
             scope.fontSize = [
-            { value: 0 },
-            { value: 1 },
-            { value: 2 }
+                {value: 0},
+                {value: 1},
+                {value: 2}
             ]
 
             if (!localStorage.getItem('checkedListSetting')) {
@@ -41,9 +41,7 @@ lametayel.directive('menu', ['$state', '$rootScope', '$timeout', 'pushnotificati
             }
 
 
-
             var d = true;
-
 
 
             scope.selectSetting = function (listItemSetting) {
@@ -71,7 +69,7 @@ lametayel.directive('menu', ['$state', '$rootScope', '$timeout', 'pushnotificati
             scope.shareFreind = function () {
                 str = 'השתמשתי באפליקציה של למטייל, ממליץ לכם גם :)';
                 console.log(str);
-                share.share({ title: str })
+                share.share({title: str})
                 //$rootScope.$broadcast('shareList',{data:str});
             }
 
@@ -88,7 +86,6 @@ lametayel.directive('menu', ['$state', '$rootScope', '$timeout', 'pushnotificati
                 e.stopPropagation();
                 return false;
             });
-
 
 
             $rootScope.showMenuFunc = function (e) {
@@ -132,14 +129,18 @@ lametayel.directive('menu', ['$state', '$rootScope', '$timeout', 'pushnotificati
             scope.makeNewTrip = function () {
                 $rootScope.clearListData()
                 $state.transitionTo('new-trip')
-                 scope.closeMenu();
-           //     analytics.sendAnalyticsEvent('event', 'New_List_Btn')
+                scope.closeMenu();
+                //     analytics.sendAnalyticsEvent('event', 'New_List_Btn')
             }
 
+            scope.privacyPolicy = function () {
+                var link = "https://www.lametayel.co.il/%D7%AA%D7%A0%D7%90%D7%99+%D7%A9%D7%99%D7%9E%D7%95%D7%A9+%D7%91%D7%90%D7%A4%D7%9C%D7%99%D7%A7%D7%A6%D7%99%D7%99%D7%AA+%D7%A6%D7%A7%D7%9C%D7%99%D7%A1%D7%98";
+                $rootScope.openLink(link);
+            };
 
 
         },
         replace: true
     };
 
-} ]);
+}]);

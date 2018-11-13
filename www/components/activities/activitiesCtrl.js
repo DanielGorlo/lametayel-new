@@ -107,7 +107,9 @@ lametayel.controller('activitiesCtrl', ['$scope', '$stateParams', 'server', '$ro
             //if the user here to add activity - remove the activities that chosen in past
             if ($rootScope.addActStatus) {
                 var activitiesByPastArr = $scope.activitiesByPast.split(',')
-                var activArrayArrIds = $scope.activArray.map(function (a) { return a.ID; }); //all the custom categories arr IDS
+                var activArrayArrIds = $scope.activArray.map(function (a) {
+                    return a.ID;
+                }); //all the custom categories arr IDS
                 for (var i = 0; i < activitiesByPastArr.length; i++) {
                     var itemIndex = $.inArray(activitiesByPastArr[i], activArrayArrIds);
                     //if the index exist - remove the activity from activities array
@@ -120,7 +122,6 @@ lametayel.controller('activitiesCtrl', ['$scope', '$stateParams', 'server', '$ro
             }
 
 
-
         });
     }
 
@@ -131,9 +132,13 @@ lametayel.controller('activitiesCtrl', ['$scope', '$stateParams', 'server', '$ro
             //if the user here to add category - remove the categories that chosen in past
             if ($rootScope.addActStatus) {
 
-                var categoriesByPastArr = $filter('filter')($rootScope.placeListData.list, { isCustomCat: true });
-                $scope.categoriesByPastArrIds = categoriesByPastArr.map(function (a) { return a.id; }); // get the categories that chosen in past IDS
-                var catArrayArrIds = $scope.catArray.map(function (a) { return a.id; }); //all the custom categories arr IDS
+                var categoriesByPastArr = $filter('filter')($rootScope.placeListData.list, {isCustomCat: true});
+                $scope.categoriesByPastArrIds = categoriesByPastArr.map(function (a) {
+                    return a.id;
+                }); // get the categories that chosen in past IDS
+                var catArrayArrIds = $scope.catArray.map(function (a) {
+                    return a.id;
+                }); //all the custom categories arr IDS
                 for (var i = 0; i < $scope.categoriesByPastArrIds.length; i++) {
                     //get the index of the chosen in past cat id in the all cat ids
                     var itemIndex = $.inArray($scope.categoriesByPastArrIds[i], catArrayArrIds);
@@ -222,7 +227,6 @@ lametayel.controller('activitiesCtrl', ['$scope', '$stateParams', 'server', '$ro
     }
 
 
-
     $scope.widthScreen = window.innerWidth - 26;
     if ($scope.widthScreen % 2 == 1) {
         $scope.widthScreen = $scope.widthScreen - 1;
@@ -249,7 +253,7 @@ lametayel.controller('activitiesCtrl', ['$scope', '$stateParams', 'server', '$ro
         if (!$rootScope.addActStatus) {
             //check if the user chosen activities -validation
             if (!($scope.activityChosen.length > 0)) {
-             
+
                 $scope.showActivitiesValidation = true;
 
             }
@@ -268,7 +272,7 @@ lametayel.controller('activitiesCtrl', ['$scope', '$stateParams', 'server', '$ro
             if (!($scope.activityChosen.length > 0 && $scope.weatherChosen.length > 0)) {
                 return;
             }
-            else  {
+            else {
                 var weatherChosen = "";
                 $.each($scope.weatherChosen, function (key, value) {
                     if (value) {
@@ -318,7 +322,14 @@ lametayel.controller('activitiesCtrl', ['$scope', '$stateParams', 'server', '$ro
 
                 localStorage.setItem("list" + newListObj.id, JSON.stringify(newListObj))
                 //  $state.transitionTo('trip-list', { id: newListObj.id, placetid: $scope.placetid, people: $scope.people, weather: weatherChosen, activities: activityChosen, customCats: customCatChosen });
-                $state.transitionTo('first-level-list', { id: newListObj.id, placetid: $scope.placetid, people: $scope.people, weather: weatherChosen, activities: activityChosen, customCats: customCatChosen });
+                $state.transitionTo('first-level-list', {
+                    id: newListObj.id,
+                    placetid: $scope.placetid,
+                    people: $scope.people,
+                    weather: weatherChosen,
+                    activities: activityChosen,
+                    customCats: customCatChosen
+                });
             }
 
         }
@@ -341,16 +352,24 @@ lametayel.controller('activitiesCtrl', ['$scope', '$stateParams', 'server', '$ro
             //   customCatChosen += $scope.categoriesByPastArrIds;
             activityChosen += $scope.activitiesByPast;
             //  $state.transitionTo('trip-list', { id: $scope.listId, placetid: $scope.placetid, people: $scope.people, weather: $scope.weather, activities: activityChosen, customCats: customCatChosen, byAddActivity: true });
-            $state.transitionTo('first-level-list', { id: $scope.listId, placetid: $scope.placetid, people: $scope.people, weather: $scope.weather, activities: activityChosen, customCats: customCatChosen, byAddActivity: true });
+            $state.transitionTo('first-level-list', {
+                id: $scope.listId,
+                placetid: $scope.placetid,
+                people: $scope.people,
+                weather: $scope.weather,
+                activities: activityChosen,
+                customCats: customCatChosen,
+                byAddActivity: true
+            });
         }
 
         $scope.clearListData();
     }
     $scope.forecastArray = [
-    	{ toBe: 'חם', id: '8' },
-    	{ toBe: 'נעים', id: '7' },
-    	{ toBe: 'קר', id: '6' },
-    	{ toBe: 'קר מאוד', id: '5' }
+        {toBe: 'חם', id: '8'},
+        {toBe: 'נעים', id: '7'},
+        {toBe: 'קר', id: '6'},
+        {toBe: 'קר מאוד', id: '5'}
     ];
     //$scope.activArray = [
     //	{ witch: 'עירוני', fontIcon: 'filter-9' },
@@ -367,8 +386,5 @@ lametayel.controller('activitiesCtrl', ['$scope', '$stateParams', 'server', '$ro
     //];
 
 
-
-
-
-} ])
+}])
 

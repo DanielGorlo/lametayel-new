@@ -32,7 +32,8 @@ lametayel.controller('mylistsCtrl', ['$scope', '$http', '$timeout', '$stateParam
         $event.stopPropagation();
     }
     $scope.closeinner = function () {
-        $scope.openMenuIndex = -1; $scope.showOver = false;
+        $scope.openMenuIndex = -1;
+        $scope.showOver = false;
     }
 
 
@@ -42,7 +43,7 @@ lametayel.controller('mylistsCtrl', ['$scope', '$http', '$timeout', '$stateParam
         placeAns = placeAns + item.name + ', מהתאריך: ';
         placeAns = placeAns + item.startDate + ' עד ל:';
         placeAns = placeAns + item.endDate + '.';
-        share.share({ title: placeAns });
+        share.share({title: placeAns});
         // $rootScope.$broadcast('shareList', { data: placeAns });
         console.log(placeAns);
     }
@@ -57,8 +58,10 @@ lametayel.controller('mylistsCtrl', ['$scope', '$http', '$timeout', '$stateParam
     $scope.removeListClick = function (item) {
         //remove the place from plcaes list array
         //detect the plcae index in the placesList array
-        var placeIndex = $scope.placesList.map(function (obj) { return obj.id; }).indexOf(item.id);
-        $scope.placeToRemove = { index: placeIndex, data: item };
+        var placeIndex = $scope.placesList.map(function (obj) {
+            return obj.id;
+        }).indexOf(item.id);
+        $scope.placeToRemove = {index: placeIndex, data: item};
         $rootScope.$broadcast('hideSubMenu');
         $rootScope.showDoubleCheck = true;
         //$rootScope.hideMask()
@@ -117,11 +120,15 @@ lametayel.controller('mylistsCtrl', ['$scope', '$http', '$timeout', '$stateParam
         }, 0);
 
 
-
-
     }
     $scope.goToList = function (item) {
-        $state.transitionTo('trip-list', { id: item.id, placetid: item.placetid, people: item.people, weather: item.weather, activities: item.activities });
+        $state.transitionTo('trip-list', {
+            id: item.id,
+            placetid: item.placetid,
+            people: item.people,
+            weather: item.weather,
+            activities: item.activities
+        });
         //$state.transitionTo('trip-list', { listIndex: index});
     }
 
@@ -144,7 +151,6 @@ lametayel.controller('mylistsCtrl', ['$scope', '$http', '$timeout', '$stateParam
     }
 
 
-
     $scope.closeAllListMenu = function () {
         $('.list-menu').removeClass('open');
     }
@@ -162,12 +168,13 @@ lametayel.controller('mylistsCtrl', ['$scope', '$http', '$timeout', '$stateParam
             if (placeList.list) {
                 for (var i = 0; i < placeList.list.length; i++) {
                     if (placeList.list[i].deleted == false) {
-                        var catItems = $filter('filter')(placeList.list[i].items, { recomanded: false }) //the cat items
-                        var catItemsLength = $filter('filter')(catItems, { recomanded: false }).length//the cat items length - without recommanded
-                        deletedCounter = $filter('filter')(catItems, { deleted: true }).length // remove the deleted from sum
-                        catItemsLength = catItemsLength - deletedCounter; ;
+                        var catItems = $filter('filter')(placeList.list[i].items, {recomanded: false}) //the cat items
+                        var catItemsLength = $filter('filter')(catItems, {recomanded: false}).length//the cat items length - without recommanded
+                        deletedCounter = $filter('filter')(catItems, {deleted: true}).length // remove the deleted from sum
+                        catItemsLength = catItemsLength - deletedCounter;
+                        ;
                         allItemsCounter += catItemsLength;
-                        itemsCheckedCounter += $filter('filter')(catItems, { checked: true, deleted: false }).length
+                        itemsCheckedCounter += $filter('filter')(catItems, {checked: true, deleted: false}).length
 
                     }
 
@@ -182,7 +189,6 @@ lametayel.controller('mylistsCtrl', ['$scope', '$http', '$timeout', '$stateParam
     }
 
 
-
     $scope.updateNameAndDate = function (list) {
         var x = 5;
         $scope.listToUpdate = list;
@@ -190,12 +196,11 @@ lametayel.controller('mylistsCtrl', ['$scope', '$http', '$timeout', '$stateParam
         $scope.dateFrom = undefined;//init thr date from
         $scope.dateuntil = undefined;//init thr date from
         $timeout(function () {
-           // $scope.showUpdatePoup = true;
-                 $scope.showUpdatePoup = true;
-                 $scope.$apply()
+            // $scope.showUpdatePoup = true;
+            $scope.showUpdatePoup = true;
+            $scope.$apply()
         }, 100)
-                                     
-                                     
+
 
         // $rootScope.placeDataToUpdate = $scope.listToUpdate.name;
         $scope.placeTerm = {}
@@ -205,9 +210,9 @@ lametayel.controller('mylistsCtrl', ['$scope', '$http', '$timeout', '$stateParam
         $scope.dateFromStringToDisplay = list.startDate
         $scope.dateUntilStringToDisplay = list.endDate
     }
-                                     $scope.closeUpdateDatePopup = function(){
-                                        $scope.showUpdatePoup =false
-                                     }
+    $scope.closeUpdateDatePopup = function () {
+        $scope.showUpdatePoup = false
+    }
     $scope.getPlacesByTerm = function () {
 
         $scope.placeTermByServer = false; //check if the user chose place from server - promise that the place has data
@@ -266,9 +271,9 @@ lametayel.controller('mylistsCtrl', ['$scope', '$http', '$timeout', '$stateParam
         $scope.inputFocus = false;
         $scope.shadow = false;
         $timeout(
-        function () {
-            $scope.showAutocomplete = false
-        }, 500);
+            function () {
+                $scope.showAutocomplete = false
+            }, 500);
 
         //$scope.places = [];
     }
@@ -334,9 +339,15 @@ lametayel.controller('mylistsCtrl', ['$scope', '$http', '$timeout', '$stateParam
 
     $scope.equalDate = function (d1, d2) {
 
-        if (d1.getFullYear() != d2.getFullYear()) { return false; }
-        if (d1.getMonth() != d2.getMonth()) { return false; }
-        if (d1.getDate() != d2.getDate()) { return false; }
+        if (d1.getFullYear() != d2.getFullYear()) {
+            return false;
+        }
+        if (d1.getMonth() != d2.getMonth()) {
+            return false;
+        }
+        if (d1.getDate() != d2.getDate()) {
+            return false;
+        }
         return true;
     }
 
@@ -404,7 +415,7 @@ lametayel.controller('mylistsCtrl', ['$scope', '$http', '$timeout', '$stateParam
         //get the places list arr
         listPlacesIdsArr = JSON.parse(listPlacesIds);
         //find the item to update
-        var listToUpdate = $filter('filter')(listPlacesIdsArr, { id: $scope.listToUpdate.id })[0];
+        var listToUpdate = $filter('filter')(listPlacesIdsArr, {id: $scope.listToUpdate.id})[0];
         //detect the index
         var indexInArr = -1;
         for (var i = 0; i < listPlacesIdsArr.length; i++) {
@@ -455,11 +466,11 @@ lametayel.controller('mylistsCtrl', ['$scope', '$http', '$timeout', '$stateParam
                 //close the popup
                 //$scope.showUpdatePoup = false
 
-                                                                                                                                                  $timeout(function () {
-                                                                                                                                                           // $scope.showUpdatePoup = true;
-                                                                                                                                                           $scope.showUpdatePoup = false;
-                                                                                                                                                           $scope.$apply()
-                                                                                                                                                           }, 0)
+                $timeout(function () {
+                    // $scope.showUpdatePoup = true;
+                    $scope.showUpdatePoup = false;
+                    $scope.$apply()
+                }, 0)
 
             });
 
@@ -484,14 +495,14 @@ lametayel.controller('mylistsCtrl', ['$scope', '$http', '$timeout', '$stateParam
             //refresh the lists in the page
             $scope.initLists()
             //close the popup
-           // $scope.showUpdatePoup = false
-                                     $timeout(function () {
-                                              // $scope.showUpdatePoup = true;
-                                              $scope.showUpdatePoup = false;
-                                              $scope.$apply()
-                                              }, 0)
+            // $scope.showUpdatePoup = false
+            $timeout(function () {
+                // $scope.showUpdatePoup = true;
+                $scope.showUpdatePoup = false;
+                $scope.$apply()
+            }, 0)
         }
 
 
     }
-} ])
+}])

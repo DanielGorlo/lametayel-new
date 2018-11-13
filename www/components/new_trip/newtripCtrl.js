@@ -51,8 +51,6 @@ lametayel.controller('newtripCtrl', ['$scope', '$http', '$timeout', '$stateParam
         }
 
 
-
-
     }
     $scope.setDate = function () {
         $scope.dateChosenArr ? '' : $scope.dateChosenArr = [false, false]
@@ -105,26 +103,25 @@ lametayel.controller('newtripCtrl', ['$scope', '$http', '$timeout', '$stateParam
         $scope.inputFocus = false;
         $scope.shadow = false;
         $timeout(
-        function () {
-            $scope.showAutocomplete = false
-              //if there is no place
-        if (!$scope.placeTermByServer == true || !$rootScope.chosenPlaceData) {
+            function () {
+                $scope.showAutocomplete = false
+                //if there is no place
+                if (!$scope.placeTermByServer == true || !$rootScope.chosenPlaceData) {
 
-            $scope.showPlaceValidation = true;
+                    $scope.showPlaceValidation = true;
 
-        }
-        else {
-            $scope.showPlaceValidation = false;
-        }
-        }, 500);
+                }
+                else {
+                    $scope.showPlaceValidation = false;
+                }
+            }, 500);
 
-       
 
         //$scope.places = [];
     }
 
     $scope.startDate = function () {
-      
+
         //set the date that chosen - for back btn
         $rootScope.dateFromForBack = angular.copy($scope.dateFrom);
         $scope.checkAllFieldsFilled()
@@ -136,9 +133,15 @@ lametayel.controller('newtripCtrl', ['$scope', '$http', '$timeout', '$stateParam
 
     $scope.equalDate = function (d1, d2) {
 
-        if (d1.getFullYear() != d2.getFullYear()) { return false; }
-        if (d1.getMonth() != d2.getMonth()) { return false; }
-        if (d1.getDate() != d2.getDate()) { return false; }
+        if (d1.getFullYear() != d2.getFullYear()) {
+            return false;
+        }
+        if (d1.getMonth() != d2.getMonth()) {
+            return false;
+        }
+        if (d1.getDate() != d2.getDate()) {
+            return false;
+        }
         return true;
     }
 
@@ -230,11 +233,11 @@ lametayel.controller('newtripCtrl', ['$scope', '$http', '$timeout', '$stateParam
         else {
             $scope.dateFromValidation = false;
         }
-        if ( !$scope.dateuntil) {
+        if (!$scope.dateuntil) {
             $scope.dateUntilValidation = true;
 
         }
-         else {
+        else {
             $scope.dateUntilValidation = false;
         }
         //if the until date is befor the from date
@@ -296,7 +299,16 @@ lametayel.controller('newtripCtrl', ['$scope', '$http', '$timeout', '$stateParam
             });
             //placetid: $scope.chosenPlaceData.DEST_TID
             console.log('trans to activities')
-            $state.transitionTo('activities', { placetid: $rootScope.chosenPlaceData.DEST_TID, placename: $rootScope.chosenPlaceData.DEST_NAME, datefrom: dateFormat($scope.dateFrom, "dd.mm.yyyy"), dateuntil: dateFormat($scope.dateuntil, "dd.mm.yyyy"), people: peopleCsv, placeurl: $rootScope.chosenPlaceData.URL, isnewList: true, who: $rootScope.who });
+            $state.transitionTo('activities', {
+                placetid: $rootScope.chosenPlaceData.DEST_TID,
+                placename: $rootScope.chosenPlaceData.DEST_NAME,
+                datefrom: dateFormat($scope.dateFrom, "dd.mm.yyyy"),
+                dateuntil: dateFormat($scope.dateuntil, "dd.mm.yyyy"),
+                people: peopleCsv,
+                placeurl: $rootScope.chosenPlaceData.URL,
+                isnewList: true,
+                who: $rootScope.who
+            });
         }
 
     }
@@ -409,7 +421,7 @@ lametayel.controller('newtripCtrl', ['$scope', '$http', '$timeout', '$stateParam
         $scope.showAutocomplete = false
         $scope.checkAllFieldsFilled();
     }
-} ])
+}])
 
 
 $.log = function (message) {

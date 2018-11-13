@@ -18,17 +18,17 @@ lametayel.controller('triplistCtrl', [
 
         analytics.sendPageView('Second_Creation_List')
         $rootScope.sendPageAppsee('edit list')
-        $rootScope.mylist             = false;
-        $scope.showLoadMoreLoader     = false;
-        $rootScope.showItemPage       = false;
-        $scope.showLoader             = true;
-        $scope.stopNext               = false;
-        $scope.limitLength            = 3;
-        $scope.repeatFrom             = 0
+        $rootScope.mylist = false;
+        $scope.showLoadMoreLoader = false;
+        $rootScope.showItemPage = false;
+        $scope.showLoader = true;
+        $scope.stopNext = false;
+        $scope.limitLength = 3;
+        $scope.repeatFrom = 0
         $scope.newActReturnFromServer = false;
-        $rootScope.placeListData      = {} //? $rootScope.placeListData.list = {} : ""
-        $scope.Math                   = window.Math;
-        $scope.changeTimeAmount       = function () {
+        $rootScope.placeListData = {} //? $rootScope.placeListData.list = {} : ""
+        $scope.Math = window.Math;
+        $scope.changeTimeAmount = function () {
             str = $('#item-amount')
                 .val();
             if (str == '') {
@@ -41,12 +41,12 @@ lametayel.controller('triplistCtrl', [
 
             $scope.itemAmount = str;
             if ((str == 0 || str == '0' || str == '1' || str == 1) && (str != '')) {
-                $scope.iszero     = true;
+                $scope.iszero = true;
                 $scope.itemAmount = 1;
             } else if (str.length == 0) {
                 $scope.iszero = true;
             } else if (str == 0 || str == '0') {
-                $scope.iszero     = true;
+                $scope.iszero = true;
                 $scope.itemAmount = 1;
             } else {
                 $scope.iszero = false;
@@ -84,7 +84,7 @@ lametayel.controller('triplistCtrl', [
                 $timeout(function () {
                         // $scope.showLoadMoreLoader = true; console.log('scope.limitLength')
                         $scope.limitLength = $rootScope.placeListData.list.length;
-                        $scope.repeatFrom  = $scope.limitLength;
+                        $scope.repeatFrom = $scope.limitLength;
                     }, 500 //else - hide the small loader
                 );
 
@@ -96,10 +96,10 @@ lametayel.controller('triplistCtrl', [
         //update the list length - for push objects to list
         $scope.updateListLength = function () {
             $scope.limitLength = $rootScope.placeListData.list.length;
-            $scope.repeatFrom  = $scope.limitLength;
+            $scope.repeatFrom = $scope.limitLength;
         }
 
-        $scope.setCustomCats            = function () {
+        $scope.setCustomCats = function () {
             var customCatsArray = $scope
                 .customCats
                 .split(',')
@@ -125,10 +125,10 @@ lametayel.controller('triplistCtrl', [
             }
 
         }
-        $scope.addNewActivitiesData     = function (data) {
+        $scope.addNewActivitiesData = function (data) {
             //$rootScope.placeListData
             var allNewData = $scope.convertListFromServerToClientFormat(data);
-            var oldData    = $rootScope.placeListData.list
+            var oldData = $rootScope.placeListData.list
             // console.log(allNewData) compare the new array with the old array and add the
             // difference cats and items
             for (var i = 0; i < allNewData.length; i++) {
@@ -228,14 +228,14 @@ lametayel.controller('triplistCtrl', [
             var innerAns = $scope.createCatTextForShare(activity);
             share.share({
                 title: 'רשימת פריטים לאריזה',
-                desc : innerAns
+                desc: innerAns
             });
 
         }
 
         $scope.createCatTextForShare = function (activity) {
-            innerArr      = activity.items;
-            innerAns      = '';
+            innerArr = activity.items;
+            innerAns = '';
             var withTitle = false;
 
             for (i = 0; i < innerArr.length; i++) {
@@ -288,10 +288,10 @@ lametayel.controller('triplistCtrl', [
 
         $scope.convertListFromServerToClientFormat = function (data) {
             if (data.ITEMS && data.Iitem) {
-                var lastCatID           = 0;
-                var packingList         = data.ITEMS.ITEM;
+                var lastCatID = 0;
+                var packingList = data.ITEMS.ITEM;
                 $scope.convertedListArr = []; //the converted data array
-                var convertedIndex      = -1;
+                var convertedIndex = -1;
                 for (var i = 0; i < packingList.length; i++) {
                     if (lastCatID == packingList[i].CAT_ID) {
                         $scope.addItemToConvertedlist(packingList[i], convertedIndex)
@@ -299,11 +299,11 @@ lametayel.controller('triplistCtrl', [
                         lastCatID = packingList[i].CAT_ID;
                         ++convertedIndex; // set the converted index
                         //convertedListArr
-                        var newCatObj        = {}
-                        newCatObj.id         = packingList[i].CAT_ID;
-                        newCatObj.name       = packingList[i].CAT_TITLE;
-                        newCatObj.deleted    = false;
-                        newCatObj.items      = [];
+                        var newCatObj = {}
+                        newCatObj.id = packingList[i].CAT_ID;
+                        newCatObj.name = packingList[i].CAT_TITLE;
+                        newCatObj.deleted = false;
+                        newCatObj.items = [];
                         newCatObj.recomanded = [];
                         $scope
                             .convertedListArr
@@ -319,49 +319,49 @@ lametayel.controller('triplistCtrl', [
 
         $scope.addItemToConvertedlist = function (item, convertedIndex) {
             //the current cat -אריזה, ביגוד
-            var currentCat                     = $scope.convertedListArr[convertedIndex];
+            var currentCat = $scope.convertedListArr[convertedIndex];
             //the current item to add to cat - מזוודה, טרולי
-            var newItemInnerCat                = {}
-            newItemInnerCat.id                 = item.ITEM_ID;
-            newItemInnerCat.name               = item.ITEM_TITLE;
-            newItemInnerCat.checked            = false;
-            newItemInnerCat.recomanded         = item.ITEM_TYPE == "2" ?
+            var newItemInnerCat = {}
+            newItemInnerCat.id = item.ITEM_ID;
+            newItemInnerCat.name = item.ITEM_TITLE;
+            newItemInnerCat.checked = false;
+            newItemInnerCat.recomanded = item.ITEM_TYPE == "2" ?
                 true :
                 false; // if the item type=2 is a recommanded type. else- is main item
             newItemInnerCat.recomandedOriginal = newItemInnerCat.recomanded;
-            newItemInnerCat.deleted            = false;
-            newItemInnerCat.comment            = "";
-            newItemInnerCat.amount             = 1;
+            newItemInnerCat.deleted = false;
+            newItemInnerCat.comment = "";
+            newItemInnerCat.amount = 1;
 
-            newItemInnerCat.notification       = false;
+            newItemInnerCat.notification = false;
             newItemInnerCat.dateToNotification = "";
             newItemInnerCat.hourToNotification = "";
-            newItemInnerCat.link               = item.SHOP_LINK;
+            newItemInnerCat.link = item.SHOP_LINK;
 
             currentCat
                 .items
                 .push(newItemInnerCat);
 
         }
-        $scope.initCompletePercents   = function () {
+        $scope.initCompletePercents = function () {
             // (activity.items|filter:  ).length
             var itemsCheckedCounter = 0;
-            var allItemsCounter     = 0;
+            var allItemsCounter = 0;
             if ($rootScope.placeListData.list) {
                 for (var i = 0; i < $scope.placeListData.list.length; i++) {
                     if ($scope.placeListData.list[i].deleted == false) {
-                        var catItems       = $filter('filter')($scope.placeListData.list[i].items, {
+                        var catItems = $filter('filter')($scope.placeListData.list[i].items, {
                             recomanded: false
                         }) //the cat items
                         var catItemsLength = $filter('filter')(catItems, {
                             recomanded: false
                         })
                             .length //the cat items length - without recommanded
-                        deletedCounter     = $filter('filter')(catItems, {
+                        deletedCounter = $filter('filter')(catItems, {
                             deleted: true
                         })
                             .length // remove the deleted from sum
-                        catItemsLength     = catItemsLength - deletedCounter;
+                        catItemsLength = catItemsLength - deletedCounter;
                         ;
                         allItemsCounter += catItemsLength;
                         itemsCheckedCounter += $filter('filter')(catItems, {
@@ -385,12 +385,12 @@ lametayel.controller('triplistCtrl', [
         // allItemsCounter = $filter('filter')(catItems, {deleted: false}).length; }
         // return checkedItemsCount+' / '+ allItemsCounter }
         $scope.initData = function () {
-            $scope.activities       = $stateParams.activities;
-            $scope.weather          = $stateParams.weather;
-            $scope.listId           = $stateParams.id;
-            $scope.placetid         = $stateParams.placetid;
-            $scope.people           = $stateParams.people;
-            $scope.customCats       = $stateParams.customCats;
+            $scope.activities = $stateParams.activities;
+            $scope.weather = $stateParams.weather;
+            $scope.listId = $stateParams.id;
+            $scope.placetid = $stateParams.placetid;
+            $scope.people = $stateParams.people;
+            $scope.customCats = $stateParams.customCats;
             $rootScope.addActStatus = $stateParams.byAddActivity == "true" ?
                 true :
                 false;
@@ -425,7 +425,7 @@ lametayel.controller('triplistCtrl', [
         $scope.listIndex = $stateParams.listIndex;
 
         //General vars
-        $scope.pageClass        = 'page-trip-list';
+        $scope.pageClass = 'page-trip-list';
         //$scope.package = [];
         $scope.recommendedClose = function () {
             $('.recommended-list')
@@ -467,12 +467,10 @@ lametayel.controller('triplistCtrl', [
             // whenClickOutside($('info-popup'),$scope.closeInfoPopup);
             var container = $('info-popup');
             var onClickOutside = $scope.closeInfoPopup;
-            $(document).on('mouseup',function(e)
-            {
+            $(document).on('mouseup', function (e) {
                 // if the target of the click isn't the container nor a descendant of the container
-                if($scope.openPopup)
-                    if (!container.is(e.target) && container.has(e.target).length === 0)
-                    {
+                if ($scope.openPopup)
+                    if (!container.is(e.target) && container.has(e.target).length === 0) {
                         onClickOutside();
                         $(document).off('mouseup')
                     }
@@ -492,10 +490,10 @@ lametayel.controller('triplistCtrl', [
 
             if (item) {
                 item.recomanded = true;
-                item.checked    = false
+                item.checked = false
             } else {
                 activity.items[i].recomanded = true;
-                activity.items[i].checked    = false;
+                activity.items[i].checked = false;
 
             }
             $scope.saveChangesAndData()
@@ -559,20 +557,20 @@ lametayel.controller('triplistCtrl', [
             var customItem = {}
             if ($("#add-item-" + i)
                 .val() != '') {
-                customItem      = {
-                    "id"                : $rootScope.getRandomId(),
-                    "name"              : $("#add-item-" + i)
+                customItem = {
+                    "id": $rootScope.getRandomId(),
+                    "name": $("#add-item-" + i)
                         .val(),
-                    "checked"           : false,
-                    "deleted"           : false,
-                    "recomanded"        : false,
-                    "comment"           : "",
-                    "amount"            : "1",
-                    "notification"      : false,
+                    "checked": false,
+                    "deleted": false,
+                    "recomanded": false,
+                    "comment": "",
+                    "amount": "1",
+                    "notification": false,
                     "dateToNotification": "",
                     "hourToNotification": "",
-                    "link"              : "",
-                    "isNewItem"         : true
+                    "link": "",
+                    "isNewItem": true
                 }
                 customItem.date = new Date()
                     .getTime()
@@ -620,12 +618,12 @@ lametayel.controller('triplistCtrl', [
             if ($("#add-category")
                 .val() != '') {
                 newCatObj = {
-                    "id"         : $rootScope.getRandomId(),
-                    "name"       : $(".add-category")
+                    "id": $rootScope.getRandomId(),
+                    "name": $(".add-category")
                         .val(),
-                    "deleted"    : false,
-                    "items"      : [],
-                    "recomanded" : [],
+                    "deleted": false,
+                    "items": [],
+                    "recomanded": [],
                     "isCustomCat": true
                 }
                 $rootScope
@@ -714,10 +712,10 @@ lametayel.controller('triplistCtrl', [
                         .slideUp(500);
                     activity.added = false;
                 } else {
-                    var openItemOffsetTop      = openItem
+                    var openItemOffsetTop = openItem
                         .offset()
                         .top
-                    var openItemHeight         = openItem.height()
+                    var openItemHeight = openItem.height()
                     var currentWindowScrollPos = $('body')
                         .scrollTop()
                     $('.recommended-list:visible')
@@ -766,10 +764,10 @@ lametayel.controller('triplistCtrl', [
             if ($scope.noJoy == false && item.recomanded == false) {
             } else {
                 console.log('android')
-                item.date      = new Date()
+                item.date = new Date()
                     .getTime()
                     .toString();
-                var scrollPos  = $('body')
+                var scrollPos = $('body')
                     .scrollTop();
                 var itemHeight = $($("ul.items-activity li")[i])
                     .height() > 33 ?
@@ -822,19 +820,19 @@ lametayel.controller('triplistCtrl', [
         };
 
         $scope.pushUpItemAnimation = function (activity, item, i, activityIndex) {
-            item.show3d     = true;
-            var activitObj  = $("#recom" + activityIndex);
-            var allItems    = activitObj.find(".recommended-item");
+            item.show3d = true;
+            var activitObj = $("#recom" + activityIndex);
+            var allItems = activitObj.find(".recommended-item");
             var clickedItem = $(allItems[i])
 
-            var item3d            = clickedItem.find('.item3d');
+            var item3d = clickedItem.find('.item3d');
             //get the  recomanded title position
-            var recomOffset       = $('#recom' + activityIndex)
+            var recomOffset = $('#recom' + activityIndex)
                 .offset()
             //get the current item that click offset
             var clickedItemOffset = clickedItem.offset()
-            var distance          = clickedItemOffset.top - recomOffset.top + 50;
-            item.show3d           = true;
+            var distance = clickedItemOffset.top - recomOffset.top + 50;
+            item.show3d = true;
             //show the animation
             $timeout(function () {
                 item3d.css('transform', 'translateY(-' + distance + 'px)')
@@ -848,10 +846,10 @@ lametayel.controller('triplistCtrl', [
         }
 
         $scope.initPushUpItemAnimation = function (activity, item, i, activityIndex) {
-            var activitObj  = $("#recom" + activityIndex);
-            var allItems    = activitObj.find(".recommended-item");
+            var activitObj = $("#recom" + activityIndex);
+            var allItems = activitObj.find(".recommended-item");
             var clickedItem = $(allItems[i])
-            var item3d      = clickedItem.find('.item3d');
+            var item3d = clickedItem.find('.item3d');
             item3d.css('transform', 'initial')
             item3d.css('width', '100%')
 
@@ -861,20 +859,20 @@ lametayel.controller('triplistCtrl', [
             $scope.openRecommended(activity, i);
             $timeout(function () {
                 //get the next activity that not deleted get all the not deleted activities
-                var activeActivities             = $filter('filter')($rootScope.placeListData.list, {
+                var activeActivities = $filter('filter')($rootScope.placeListData.list, {
                     deleted: false
                 });
                 //get the original index
-                var originalActivityIndex        = activeActivities.indexOf(activity);
+                var originalActivityIndex = activeActivities.indexOf(activity);
                 //get the next object
                 var nextActivityInNotDeletedList = activeActivities[parseInt(originalActivityIndex + 1)];
                 //get the next index in original list
-                var nextActivityIndex            = $rootScope
+                var nextActivityIndex = $rootScope
                     .placeListData
                     .list
                     .indexOf(nextActivityInNotDeletedList);
                 // var nextActivityRecom = $("#recom" + parseInt(i + 1));
-                var nextActivityRecom            = $("#recom" + nextActivityIndex);
+                var nextActivityRecom = $("#recom" + nextActivityIndex);
                 if ($(nextActivityRecom)
                     .offset()) {
                     nextActivityRecomOffsetTop = $(nextActivityRecom)
@@ -889,7 +887,7 @@ lametayel.controller('triplistCtrl', [
 
         }
         //addNotes
-        $scope.addNotes        = function (item) {
+        $scope.addNotes = function (item) {
             $rootScope.itemToEdit = item;
             // generalDetails.setItemToEdit(item);  $state.transitionTo('item');
 
@@ -912,7 +910,7 @@ lametayel.controller('triplistCtrl', [
             $scope.initCompletePercents()
         };
 
-        $scope.unPackageAll           = function (activity, index) {
+        $scope.unPackageAll = function (activity, index) {
             for (var i = 0; i < activity.items.length; i++) {
                 if (activity.items[i].checked == true) {
                     activity.items[i].checked = false;
@@ -929,7 +927,7 @@ lametayel.controller('triplistCtrl', [
             $rootScope.hideMask()
         }
         //hide all items in single category
-        $scope.hideAllCat             = function (activity, index) {
+        $scope.hideAllCat = function (activity, index) {
             for (var i = 0; i < activity.items.length; i++) {
                 if (activity.items[i].checked == true) {
                     $scope.hideItem(activity, i)
@@ -942,7 +940,7 @@ lametayel.controller('triplistCtrl', [
         };
 
         //remove item from list
-        $scope.hideItem               = function (activity, i) {
+        $scope.hideItem = function (activity, i) {
             // if the function has "item" object - set it to deleted its has item object
             // when come from html
 
@@ -987,15 +985,15 @@ lametayel.controller('triplistCtrl', [
 
         $scope.resetAllCat = function (activity, index) {
             for (var i = 0; i < activity.items.length; i++) {
-                activity.items[i].checked            = false;
-                activity.items[i].deleted            = false;
-                activity.items[i].recomanded         = activity.items[i].recomandedOriginal;
-                activity.items[i].comment            = "";
-                activity.items[i].amount             = "1";
-                activity.items[i].notification       = false;
+                activity.items[i].checked = false;
+                activity.items[i].deleted = false;
+                activity.items[i].recomanded = activity.items[i].recomandedOriginal;
+                activity.items[i].comment = "";
+                activity.items[i].amount = "1";
+                activity.items[i].notification = false;
                 activity.items[i].dateToNotification = "";
                 activity.items[i].hourToNotification = "";
-                activity.items[i].link               = "";
+                activity.items[i].link = "";
 
                 if (activity.items[i].isNewItem == true) {
                     activity
@@ -1041,17 +1039,17 @@ lametayel.controller('triplistCtrl', [
             //add activity by activities page
             console.log('trans to activities');
             $state.transitionTo('activities', {
-                id        : $scope.listId,
-                placetid  : $scope.placetid,
-                placename : $scope.placeListData.name,
-                datefrom  : $scope.placeListData.startDate,
-                endDate   : $scope.placeListData.endDate,
-                people    : $scope.people,
-                placeurl  : $scope.placeListData.placeurl,
+                id: $scope.listId,
+                placetid: $scope.placetid,
+                placename: $scope.placeListData.name,
+                datefrom: $scope.placeListData.startDate,
+                endDate: $scope.placeListData.endDate,
+                people: $scope.people,
+                placeurl: $scope.placeListData.placeurl,
                 activities: $scope.activities,
-                weather   : $scope.weather,
+                weather: $scope.weather,
                 customCats: $scope.customCats,
-                isnewList : false
+                isnewList: false
             });
 
         }
@@ -1081,16 +1079,16 @@ lametayel.controller('triplistCtrl', [
         }
 
         $scope.openHeaderMenu = function () {
-            $scope.openMenuIndex  = -1
+            $scope.openMenuIndex = -1
             //   $rootScope.hideMask();
             $scope.showHeaderMenu = true;
             $rootScope.openMask();
         };
 
         $scope.$on('hideSubMenu', function (event, data) {
-            $scope.openMenuIndex  = -1
+            $scope.openMenuIndex = -1
             $scope.showHeaderMenu = false;
-            $scope.openPopup      = false;
+            $scope.openPopup = false;
         });
         //backbtn click event.
         $scope.$on('backbtnclick', function (event, data) {
@@ -1104,12 +1102,12 @@ lametayel.controller('triplistCtrl', [
             }
         });
 
-        $scope.showCustomCatPopup  = false;
+        $scope.showCustomCatPopup = false;
         $scope.closeCustomCatPopup = function () {
             $scope.showCustomCatPopup = false;
         }
 
-        $scope.textforJoyRide2      = '<div class="inline-block joy-ride-icon" ><span class="iconfont icon-tap1"></span' +
+        $scope.textforJoyRide2 = '<div class="inline-block joy-ride-icon" ><span class="iconfont icon-tap1"></span' +
             '></div><div class="inline-block joy-ride-text" style="padding-right:20px;"><span' +
             '>בחר מתוך רשימת פריטים מומלצים אשר הותאמו במיוחד עבורך</span></div>';
         //if the back joy ride click
@@ -1132,17 +1130,17 @@ lametayel.controller('triplistCtrl', [
         $scope.textforJoyRide2 = '- לחיצה על הריבוע שמימין לשם הפריט מאפשרת לך לסמן פריט לאחר שארזת.<br> - לחיצה ע' +
             'ל כפתור האפשרויות נוספות שבצד השמאלי של שורת הפריט מאפשרת לך לשנות כמויות, להוסי' +
             'ף הערות, תזכורות ועוד.<br> - להסרה מהרשימה – החלק ימינה.'
-        $scope.joyrideConfig   = [
+        $scope.joyrideConfig = [
 
             {
-                type     : "element",
+                type: "element",
                 advanceOn: {
                     element: '.animate-repeat:first-child .icon-more_vert, .item-hover-checked',
-                    event  : 'click'
+                    event: 'click'
                 },
-                selector : ".animate-repeat:first",
-                text     : $scope.textforJoyRide2,
-                scroll   : true,
+                selector: ".animate-repeat:first",
+                text: $scope.textforJoyRide2,
+                scroll: true,
                 placement: "top"
             }
         ];
@@ -1151,7 +1149,7 @@ lametayel.controller('triplistCtrl', [
             //joyride
             $timeout(function () {
                 $scope.startJoyRide = true;
-                $scope.noJoy        = false;
+                $scope.noJoy = false;
                 $rootScope.hideMask()
             }, 0);
         }
@@ -1159,10 +1157,10 @@ lametayel.controller('triplistCtrl', [
         $scope.goToFirstLevel = function () {
             $rootScope.hideMask()
             $state.transitionTo('first-level-list', {
-                id        : $scope.listId,
-                placetid  : $scope.placetid,
-                people    : $scope.people,
-                weather   : $scope.weather,
+                id: $scope.listId,
+                placetid: $scope.placetid,
+                people: $scope.people,
+                weather: $scope.weather,
                 activities: $scope.activities,
                 customCats: $scope.customCats
             });
@@ -1172,8 +1170,8 @@ lametayel.controller('triplistCtrl', [
         /********item page**************/
         $scope.editItem = $rootScope.itemToEdit; //generalDetails.getItemToEdit();
         $scope.pageClass = 'page-item';
-        $scope.editNote  = false;
-        $scope.initItem  = function (item) {
+        $scope.editNote = false;
+        $scope.initItem = function (item) {
             $scope.editItem = item;
 
             if ($scope.editItem.comment != '') {
@@ -1191,7 +1189,7 @@ lametayel.controller('triplistCtrl', [
                 myInt = 1;
             }
             $scope.itemAmount = myInt;
-            $scope.iszero     = ($scope.itemAmount <= 1);
+            $scope.iszero = ($scope.itemAmount <= 1);
             if ($scope.editItem.notification == true) {
             } else {
                 $scope.editItem.dateToNotification = ""; //init the reminder time
@@ -1241,7 +1239,7 @@ lametayel.controller('triplistCtrl', [
         }
 
         $scope.deleteItemCancel = function () {
-            $scope.editItem.deleted         = false;
+            $scope.editItem.deleted = false;
             $scope.showDeleteItemCancelPoup = false;
             $scope.saveChangesAndData()
         }
@@ -1310,13 +1308,13 @@ lametayel.controller('triplistCtrl', [
         //date changed - set the reminder
         $scope
             .$on('dateChange', function (event, data) {
-                var dateObj             = data.data;
-                var date                = dateFormat(dateObj, "dd/mm/yyyy");
-                var day                 = $rootScope.getHebrewDay(dateFormat(dateObj, 'dddd'))
-                var time                = dateFormat(dateObj, 'HH:MM')
+                var dateObj = data.data;
+                var date = dateFormat(dateObj, "dd/mm/yyyy");
+                var day = $rootScope.getHebrewDay(dateFormat(dateObj, 'dddd'))
+                var time = dateFormat(dateObj, 'HH:MM')
                 var dateStringToDisplay = "יום " + day + " " + date + " ב- " + time
                 $timeout(function () {
-                    $scope.editItem.notification       = true;
+                    $scope.editItem.notification = true;
                     $scope.editItem.dateToNotification = dateStringToDisplay;
                 }, 0);
 
@@ -1325,15 +1323,15 @@ lametayel.controller('triplistCtrl', [
 
             });
 
-        $scope.addReminder    = function (dateObj) {
+        $scope.addReminder = function (dateObj) {
 
             try {
-                var now                     = new Date()
-                var pushID                  = now.getTime()
+                var now = new Date()
+                var pushID = now.getTime()
                 $scope.editItem.pushNotifId = pushID;
                 //push the reminder- send date and text to push
                 pushnotification.push({
-                    id  : $scope.editItem.pushNotifId,
+                    id: $scope.editItem.pushNotifId,
                     date: dateObj,
                     text: $scope.editItem.name
                 })
@@ -1345,7 +1343,7 @@ lametayel.controller('triplistCtrl', [
         }
         $scope.cancelReminder = function (item) {
             //init the item notification data
-            $scope.editItem.notification       = false;
+            $scope.editItem.notification = false;
             //init the date string
             $scope.editItem.dateToNotification = "";
 
@@ -1373,39 +1371,39 @@ lametayel.controller('triplistCtrl', [
         /** Tutorial scripts*/
         // tutorial actions Tutorial start
         function initOverlay() {
-            $scope.showList             = true;
-            $scope.tuturialAction       = 1
-            $scope.showHeaderMenu       = false;
-            $scope.show_myOverlay       = false;
+            $scope.showList = true;
+            $scope.tuturialAction = 1
+            $scope.showHeaderMenu = false;
+            $scope.show_myOverlay = false;
             //tutorial item checkbox
-            $scope.is_tutorialChecked   = false;
+            $scope.is_tutorialChecked = false;
             //open item-page custom to tutorial
             $scope.showTutorialItemEdit = false;
-            $scope.tutorial_item        = 1;
+            $scope.tutorial_item = 1;
             //init desc to the tutorial action
-            $scope.tutorialExplain      = "לחץ בשביל לסמן את הפריט כארוז";
+            $scope.tutorialExplain = "לחץ בשביל לסמן את הפריט כארוז";
             //finger icon animation class name point/swipe
-            $scope.fingerAnimation      = "point";
+            $scope.fingerAnimation = "point";
             //show all the activies in the list
             $(".activity").show();
             //tutorial page item
-            $scope.pageTitle            = "הדגמה";
+            $scope.pageTitle = "הדגמה";
             $scope.is_tutorialEditTitle = false;
-            $scope.editTutorialExplain  = "";
+            $scope.editTutorialExplain = "";
         }
 
         initOverlay();
         //open the overlay and hide all the activities behind
         $scope.openTutorial = function () {
             $scope.show_myOverlay = true;
-            $scope.showList       = false;
+            $scope.showList = false;
         }
 
         /** Tutorial action 1 : mark item as checked */
         $scope.tutorialMarkAsChecked = function () {
             $scope.is_tutorialChecked = !$scope.is_tutorialChecked;
-            $scope.tutorialExplain    = "לחץ בשביל לערוך את הפריט";
-            $scope.tuturialAction     = 2;
+            $scope.tutorialExplain = "לחץ בשביל לערוך את הפריט";
+            $scope.tuturialAction = 2;
         }
 
         /** Tutorial action 2 : open EDIT page */
@@ -1423,41 +1421,41 @@ lametayel.controller('triplistCtrl', [
          */
         $scope.tutorialEditElements = [
             {
-                id   : "nameEdit",
+                id: "nameEdit",
                 title: "אפשר לשנות את שם הפריט על ידי לחיצה על החלק העליון של המסך"
             },
             {
-                id   : "item-amount",
+                id: "item-amount",
                 title: "כאן אפשר לשנות כמות הפריטים שרוצים לארוז"
             },
             {
-                id   : "datetime",
+                id: "datetime",
                 title: "ניתן לקבוע תזכורת לפריט על ידי לחיצה על תזכורת"
             },
             {
-                id   : "add-note",
+                id: "add-note",
                 title: "לחיצה על הערות לעצמי מאפשר להוסיף הערות לכל פריט. שלא תשכחו כלום!"
 
             }, {
-                id   : "closeTutorial",
+                id: "closeTutorial",
                 title: ""
 
             }];
         $scope.tutorialEditindex = 0;
         //move the finger to point on edit item tutorial elemets
-        $scope.moveFinger        = function () {
-            var target_Id              = $scope.tutorialEditElements[$scope.tutorialEditindex].id;
-            var explain                = $scope.tutorialEditElements[$scope.tutorialEditindex].title;
+        $scope.moveFinger = function () {
+            var target_Id = $scope.tutorialEditElements[$scope.tutorialEditindex].id;
+            var explain = $scope.tutorialEditElements[$scope.tutorialEditindex].title;
             $scope.tutorialEditindex += 1;
-            var spaceFromTop           = 15;
+            var spaceFromTop = 15;
             //set the tutorial title
             $scope.editTutorialExplain = explain;
             /**
              Description elements
              */
-            var descWrapper            = $(".itemPageTutorial #tutorialEditDescription");
-            var descArrow              = $(".itemPageTutorial #tutorialEditDescription #arrowUp");
-            var descArrowWidth         = descArrow[0].getBoundingClientRect().width;
+            var descWrapper = $(".itemPageTutorial #tutorialEditDescription");
+            var descArrow = $(".itemPageTutorial #tutorialEditDescription #arrowUp");
+            var descArrowWidth = descArrow[0].getBoundingClientRect().width;
             //Listen to index change , move finger when index is changed to avoid  set worng position to the finger
             $scope.$watch('tutorialEditindex', function () {
                 var targetRect = $(".itemPageTutorial  #" + target_Id)[0].getBoundingClientRect();
@@ -1490,9 +1488,9 @@ lametayel.controller('triplistCtrl', [
         /** Tutorial action 3 : swipe to remove item*/
         $scope.closeEditTutorial = function () {
             $scope.showTutorialItemEdit = false;
-            $scope.fingerAnimation      = "swipe";
-            $scope.tutorialExplain      = "גרור את הפריט  בשביל למחוק ";
-            $scope.tuturialAction       = 3;
+            $scope.fingerAnimation = "swipe";
+            $scope.tutorialExplain = "גרור את הפריט  בשביל למחוק ";
+            $scope.tuturialAction = 3;
 
         }
         //close the tutorial and reinit ;
@@ -1522,9 +1520,9 @@ function maxLengthCheck(object) {
 
 function isNumeric(evt) {
     var theEvent = evt || window.event;
-    var key      = theEvent.keyCode || theEvent.which;
-    key          = String.fromCharCode(key);
-    var regex    = /[0-9]|\./;
+    var key = theEvent.keyCode || theEvent.which;
+    key = String.fromCharCode(key);
+    var regex = /[0-9]|\./;
     if (!regex.test(key)) {
         theEvent.returnValue = false;
         if (theEvent.preventDefault)

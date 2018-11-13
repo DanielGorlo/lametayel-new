@@ -13,7 +13,7 @@
                     <div class="menu-img"><span class="iconfont icon-playlist_add_check"></span></div>
                     <div class="menu-item-name">הרשימות שלי</div>
                 </div>
-                 <div class="menu-item-wrap" ng-click="makeNewTrip()">
+                <div class="menu-item-wrap" ng-click="makeNewTrip()">
                     <div class="menu-img"><span class="iconfont icon-playlist_add"></span></div>
                     <div class="menu-item-name">יצירת רשימה חדשה</div>
                 </div>
@@ -37,9 +37,11 @@
                 </div>
                 <div class="menu-item-wrap">
                     <div class="menu-img"><span class="iconfont icon-mail"></span></div>
-                     <a target="_blank" href="mailto:service@lametayel.co.il?Subject=אשמח שתיצרו איתי קשר!&body=!"><div class="menu-item-name">צור קשר</div></a>
+                    <a target="_blank" href="mailto:service@lametayel.co.il?Subject=אשמח שתיצרו איתי קשר!&body=!">
+                        <div class="menu-item-name">צור קשר</div>
+                    </a>
                 </div>
-                <div  class="menu-item-wrap" ng-click="gradeUs()">
+                <div class="menu-item-wrap" ng-click="gradeUs()">
                     <div class="menu-img"><span class="iconfont icon-star"></span></div>
                     <div class="menu-item-name">דרג אותנו</div>
                 </div>
@@ -54,7 +56,8 @@
                     <span class="inline-block title">גודל פונט</span>
                     <span class="large-size inline-block">א</span>
                     <div class="inline-block range">
-                        <div data-range-slider data-floor="0" data-ceiling="2" data-step="1" data-precision="2" data-highlight="left" data-ng-model="fontSize[0].value" data-dragstop="false">
+                        <div data-range-slider data-floor="0" data-ceiling="2" data-step="1" data-precision="2"
+                             data-highlight="left" data-ng-model="fontSize[0].value" data-dragstop="false">
                         </div>
                     </div>
                     <span class="small-size inline-block">א</span>
@@ -62,14 +65,17 @@
                 <div class="setting-section item-setting">
                     <p>פריטים שסימנתי</p>
                     <div class="setting-mark">
-                        <span ng-click="selectSetting('endOfList')" class="iconfont" ng-class="{'icon-radio_button_unchecked':checkedListSetting != 'endOfList','icon-radio_button_checked':checkedListSetting == 'endOfList'}"></span><span>להעביר לסוף הרשימה</span>
+                        <span ng-click="selectSetting('endOfList')" class="iconfont"
+                              ng-class="{'icon-radio_button_unchecked':checkedListSetting != 'endOfList','icon-radio_button_checked':checkedListSetting == 'endOfList'}"></span><span>להעביר לסוף הרשימה</span>
                     </div>
                     <div class="setting-mark">
-                        <span ng-click="selectSetting('samePlace')" class="iconfont" ng-class="{'icon-radio_button_unchecked':checkedListSetting != 'samePlace','icon-radio_button_checked':checkedListSetting == 'samePlace'}"></span><span>להשאיר במיקום נוכחי</span>
+                        <span ng-click="selectSetting('samePlace')" class="iconfont"
+                              ng-class="{'icon-radio_button_unchecked':checkedListSetting != 'samePlace','icon-radio_button_checked':checkedListSetting == 'samePlace'}"></span><span>להשאיר במיקום נוכחי</span>
                     </div>
                 </div>
 
-                <div class="setting-section terms-of-use">
+                <div class="setting-section terms-of-use"
+                     ng-click='openLink("https://www.lametayel.co.il/%D7%AA%D7%A0%D7%90%D7%99+%D7%A9%D7%99%D7%9E%D7%95%D7%A9+%D7%91%D7%90%D7%A4%D7%9C%D7%99%D7%A7%D7%A6%D7%99%D7%99%D7%AA+%D7%A6%D7%A7%D7%9C%D7%99%D7%A1%D7%98")'>
                     תנאי שימוש
                 </div>
 
