@@ -65,6 +65,7 @@ lametayel.run(function ($rootScope, $state, $stateParams, $timeout, $http, serve
     $rootScope.token = "1162bd653d2ecda6ecf673a06db8fa2c";
     $rootScope.israelTid = 281;
     $rootScope.zoneid = 259;
+    $rootScope.kw = "global,_320x50";
 
     //listen to no Internet access
     //window.addEventListener('offline', function () {
@@ -154,7 +155,7 @@ lametayel.run(function ($rootScope, $state, $stateParams, $timeout, $http, serve
     }
 
     $rootScope.advBaner = function () {
-        server.request("get_static_banner", "&token=" + $rootScope.token + "&zone=" + $rootScope.zoneid + "&data_type=json").then(function (data) {
+        server.request("get_static_banner", "&token=" + $rootScope.token + "&kw=" + $rootScope.kw + "&data_type=json").then(function (data) {
             $rootScope.baner = data;
 
             if (data && data[0] && data[0] == "No Banner Found") {
